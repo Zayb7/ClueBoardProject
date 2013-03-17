@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardInitTests" project="ClueBoard" tests="9" started="9" failures="0" errors="0" ignored="0">
+  <testsuite name="ClueGame.BoardInitTests" time="0.0">
+    <testcase name="testBoardDimensions" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="FourDoorDirections" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testNumberOfDoorways" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testCalcIndex" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testRoomInitials" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testBadColumns" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testBadRoomFormat" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testRooms" classname="ClueGame.BoardInitTests" time="0.0"/>
+    <testcase name="testBadRoom" classname="ClueGame.BoardInitTests" time="0.0"/>
+  </testsuite>
+</testrun>

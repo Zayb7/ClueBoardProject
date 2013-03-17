@@ -84,7 +84,7 @@ public class TestBoard {
 			}
 		}
 		assertEquals(numDoors, countDoors);
-		RoomCell cell = board.GetRoomCellAt(dRow,dCol);
+		RoomCell cell = board.getRoomCellAt(dRow,dCol);
 		assertEquals(RoomCell.DoorDirection.DOWN, cell.getDoorDirection());	
 	}
 	
@@ -93,7 +93,7 @@ public class TestBoard {
 		char initial = 'C';
 		int row = 0;
 		int col = 0;
-		RoomCell cell = board.GetRoomCellAt(row,col);
+		RoomCell cell = board.getRoomCellAt(row,col);
 		assertEquals(initial, cell.getInitial());
 	}
 	

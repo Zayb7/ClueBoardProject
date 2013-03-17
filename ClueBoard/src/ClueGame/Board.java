@@ -18,7 +18,9 @@ public class Board {
 	private HashSet<BoardCell> targets;
 	private boolean[] visited;
 	private Map<Integer, LinkedList<Integer>> adjLists;
-
+	private LinkedList<BoardCell> adjacencies;
+	private ArrayList<LinkedList<BoardCell>> listOfAdjacencies;
+	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
@@ -188,7 +190,7 @@ public class Board {
 	}
 
 	//returns the roomCell at the given row and column
-	public RoomCell GetRoomCellAt(int row, int column) {
+	public RoomCell getRoomCellAt(int row, int column) {
 		int index = calcIndex(row, column);
 		if(cells.get(index).isRoom())
 			return (RoomCell)cells.get(index);
@@ -204,73 +206,72 @@ public class Board {
 	//calculates the adjacencies for every valid cell and stores
 	//them in adjLists 
 	public void calcAdjacencies() {
-		int tempRow, tempCol;
-		LinkedList<Integer> tempList;
-		Set<Integer> keys = adjLists.keySet();
-		System.out.println(adjLists.get(0));
-		for(int key : keys) {
-
-			tempList = new LinkedList<Integer>();
-			tempRow = key/(numRows);
-			tempCol = key%(numColumns);
-
-			if(tempRow < numRows && tempCol < numColumns) {
-				int index = 0;
-				boolean atEdge = false;
-				BoardCell current = null;
-
-				if(tempRow > 0)
-					index = calcIndex(tempRow-1,tempCol);
-				else
-					atEdge = true;
-
-				current = cells.get(index);
-				if(!atEdge && (current.isWalkway() || 
-						(current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.DOWN))){
-					tempList.add(index);
+		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
+		for(int i = 0; i < numRows; ++i) {
+			for (int j = 0; j < numColumns; ++j) {
+				int currentIndex = calcIndex(i,j);
+				adjacencies = new LinkedList<BoardCell>(); 
+				if (i-1 >= 0) {
+					int xminus1 = calcIndex(i-1, j);
+					if(adjacencyIsValid(currentIndex, xminus1)){
+						adjacencies.add(cells.get(xminus1));
+					}
 				}
-
-				atEdge = false;
-				if(tempRow < numRows - 1)
-					index = calcIndex(tempRow+1,tempCol);
-				else
-					atEdge = true;
-
-				current = cells.get(index);
-				if(!atEdge && (current.isWalkway() || 
-						(current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.UP))){
-					tempList.add(index);
+				if (j-1 >= 0) {
+					int yminus1 = calcIndex(i, j-1);
+					if(adjacencyIsValid(currentIndex, yminus1)){
+						adjacencies.add(cells.get(yminus1));
+					}
 				}
-
-				atEdge = false;
-				if(tempCol > 0)
-					index = calcIndex(tempRow,tempCol-1);
-				else
-					atEdge = true;
-				current = cells.get(index);
-
-				if(!atEdge && (current.isWalkway() || 
-						(current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.RIGHT))) {
-					tempList.add(index);
+				if (i+1 < numRows) {
+					int xplus1 = calcIndex(i+1, j);
+					if(adjacencyIsValid(currentIndex, xplus1)){
+						adjacencies.add(cells.get(xplus1));
+					}
 				}
-
-				atEdge = false;
-				if(tempCol < numColumns - 1)
-					index = calcIndex(tempRow,tempCol+1);
-				else
-					atEdge = true;
-
-
-				current = cells.get(index);
-
-				if(!atEdge && (current.isWalkway() || 
-						(current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.LEFT))){
-					tempList.add(index);
+				if (j+1 < numColumns) {
+					int yplus1 = calcIndex(i, j+1);
+					if(adjacencyIsValid(currentIndex, yplus1)){
+						adjacencies.add(cells.get(yplus1));
+					}
 				}
-				adjLists.put(key, tempList);
+				listOfAdjacencies.add(adjacencies);
 			}
-		}
+			}
 	}
+			
+	//helper method for calc adjacency, only checks for rooms
+		public boolean adjacencyIsValid(int currentIndex, int index){
+			
+			if(cells.get(currentIndex).isRoom()){
+				if(cells.get(currentIndex).isDoorway()){
+					if(cells.get(index).isWalkway()){
+						return true;
+					}
+					else{
+						return false;
+					}
+				} else{
+					return false;
+				}
+				
+			} 
+			
+			else if(cells.get(currentIndex).isWalkway()){
+				if(cells.get(index).isRoom()){
+					if(cells.get(index).isDoorway()){
+						return true;
+					} else{
+						return false;
+					}
+				} else{
+					return true;
+				}
+			}
+					
+			return true;
+		}
+	
 
 	//calculates the possible targets the given number of steps away, starting
 	//from the given row and column

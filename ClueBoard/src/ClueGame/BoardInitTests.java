@@ -55,20 +55,20 @@ public class BoardInitTests {
 	@Test
 	public void FourDoorDirections() {
 		// Test one each RIGHT/LEFT/UP/DOWN
-		RoomCell room = board.GetRoomCellAt(4, 3);
+		RoomCell room = board.getRoomCellAt(4, 3);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
-		room = board.GetRoomCellAt(4, 8);
+		room = board.getRoomCellAt(4, 8);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
-		room = board.GetRoomCellAt(15, 18);
+		room = board.getRoomCellAt(15, 18);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
-		room = board.GetRoomCellAt(14, 11);
+		room = board.getRoomCellAt(14, 11);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
 		// Test that room pieces that aren't doors know it
-		room = board.GetRoomCellAt(14, 14);
+		room = board.getRoomCellAt(14, 14);
 		assertFalse(room.isDoorway());	
 		// Test that walkways are not doors
 		BoardCell cell = board.getCellAt(board.calcIndex(0, 6));
@@ -109,11 +109,11 @@ public class BoardInitTests {
 	// correct.
 	@Test
 	public void testRoomInitials() {
-		assertEquals('C', board.GetRoomCellAt(0, 0).getInitial());
-		assertEquals('R', board.GetRoomCellAt(4, 8).getInitial());
-		assertEquals('B', board.GetRoomCellAt(9, 0).getInitial());
-		assertEquals('O', board.GetRoomCellAt(21, 22).getInitial());
-		assertEquals('K', board.GetRoomCellAt(21, 0).getInitial());
+		assertEquals('C', board.getRoomCellAt(0, 0).getInitial());
+		assertEquals('R', board.getRoomCellAt(4, 8).getInitial());
+		assertEquals('B', board.getRoomCellAt(9, 0).getInitial());
+		assertEquals('O', board.getRoomCellAt(21, 22).getInitial());
+		assertEquals('K', board.getRoomCellAt(21, 0).getInitial());
 	}
 	
 	// Test that an exception is thrown for a bad config file
