@@ -206,105 +206,105 @@ public class Board {
 	//calculates the adjacencies for every valid cell and stores
 	//them in adjLists 
 	public void calcAdjacencies() {
-		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
-		for(int i = 0; i < numRows; ++i) {
-			for (int j = 0; j < numColumns; ++j) {
-				int currentIndex = calcIndex(i,j);
-				adjacencies = new LinkedList<BoardCell>(); 
-				if (i-1 >= 0) {
-					int xminus1 = calcIndex(i-1, j);
-					if(adjacencyIsValid(currentIndex, xminus1)){
-						adjacencies.add(cells.get(xminus1));
-					}
-				}
-				if (j-1 >= 0) {
-					int yminus1 = calcIndex(i, j-1);
-					if(adjacencyIsValid(currentIndex, yminus1)){
-						adjacencies.add(cells.get(yminus1));
-					}
-				}
-				if (i+1 < numRows) {
-					int xplus1 = calcIndex(i+1, j);
-					if(adjacencyIsValid(currentIndex, xplus1)){
-						adjacencies.add(cells.get(xplus1));
-					}
-				}
-				if (j+1 < numColumns) {
-					int yplus1 = calcIndex(i, j+1);
-					if(adjacencyIsValid(currentIndex, yplus1)){
-						adjacencies.add(cells.get(yplus1));
-					}
-				}
-				listOfAdjacencies.add(adjacencies);
-			}
-			}
+//		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
+//		for(int i = 0; i < numRows; ++i) {
+//			for (int j = 0; j < numColumns; ++j) {
+//				int currentIndex = calcIndex(i,j);
+//				adjacencies = new LinkedList<BoardCell>(); 
+//				if (i-1 >= 0) {
+//					int xminus1 = calcIndex(i-1, j);
+//					if(adjacencyIsValid(currentIndex, xminus1)){
+//						adjacencies.add(cells.get(xminus1));
+//					}
+//				}
+//				if (j-1 >= 0) {
+//					int yminus1 = calcIndex(i, j-1);
+//					if(adjacencyIsValid(currentIndex, yminus1)){
+//						adjacencies.add(cells.get(yminus1));
+//					}
+//				}
+//				if (i+1 < numRows) {
+//					int xplus1 = calcIndex(i+1, j);
+//					if(adjacencyIsValid(currentIndex, xplus1)){
+//						adjacencies.add(cells.get(xplus1));
+//					}
+//				}
+//				if (j+1 < numColumns) {
+//					int yplus1 = calcIndex(i, j+1);
+//					if(adjacencyIsValid(currentIndex, yplus1)){
+//						adjacencies.add(cells.get(yplus1));
+//					}
+//				}
+//				listOfAdjacencies.add(adjacencies);
+//			}
+//			}
 		
-//		int tempRow, tempCol;
-//		    LinkedList<Integer> tempList;
-//		    Set<Integer> keys = adjLists.keySet();
-//		    System.out.println(adjLists.get(0));
-//		    for(int key : keys) {
-//		
-//		      tempList = new LinkedList<Integer>();
-//		      tempRow = key/(numRows);
-//		      tempCol = key%(numColumns);
-//		
-//		      if(tempRow < numRows && tempCol < numColumns) {
-//		        int index = 0;
-//		        boolean atEdge = false;
-//		        BoardCell current = null;
-//		
-//		        if(tempRow > 0)
-//		          index = calcIndex(tempRow-1,tempCol);
-//		        else
-//		          atEdge = true;
-//		
-//		        current = cells.get(index);
-//		        if(!atEdge && (current.isWalkway() || 
-//		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.DOWN))){
-//		          tempList.add(index);
-//		        }
-//		
-//		        atEdge = false;
-//		        if(tempRow < numRows - 1)
-//		          index = calcIndex(tempRow+1,tempCol);
-//		        else
-//		          atEdge = true;
-//		
-//		        current = cells.get(index);
-//		        if(!atEdge && (current.isWalkway() || 
-//		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.UP))){
-//		          tempList.add(index);
-//		        }
-//		
-//		        atEdge = false;
-//		        if(tempCol > 0)
-//		          index = calcIndex(tempRow,tempCol-1);
-//		        else
-//		          atEdge = true;
-//		        current = cells.get(index);
-//		
-//		        if(!atEdge && (current.isWalkway() || 
-//		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.RIGHT))) {
-//		          tempList.add(index);
-//		        }
-//		
-//		        atEdge = false;
-//		        if(tempCol < numColumns - 1)
-//		          index = calcIndex(tempRow,tempCol+1);
-//		        else
-//		          atEdge = true;
-//		
-//		
-//		        current = cells.get(index);
-//		
-//		        if(!atEdge && (current.isWalkway() || 
-//		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.LEFT))){
-//		         tempList.add(index);
-//		        }
-//		        adjLists.put(key, tempList);
-//		      }
-//		    }
+		int tempRow, tempCol;
+		    LinkedList<Integer> tempList;
+		    Set<Integer> keys = adjLists.keySet();
+		    System.out.println(adjLists.get(0));
+		    for(int key : keys) {
+		
+		      tempList = new LinkedList<Integer>();
+		      tempRow = key/(numRows);
+		      tempCol = key%(numColumns);
+		
+		      if(tempRow < numRows && tempCol < numColumns) {
+		        int index = 0;
+		        boolean atEdge = false;
+		        BoardCell current = null;
+		
+		        if(tempRow > 0)
+		          index = calcIndex(tempRow-1,tempCol);
+		        else
+		          atEdge = true;
+		
+		        current = cells.get(index);
+		        if(!atEdge && (current.isWalkway() || 
+		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.DOWN))){
+		          tempList.add(index);
+		        }
+		
+		        atEdge = false;
+		        if(tempRow < numRows - 1)
+		          index = calcIndex(tempRow+1,tempCol);
+		        else
+		          atEdge = true;
+		
+		        current = cells.get(index);
+		        if(!atEdge && (current.isWalkway() || 
+		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.UP))){
+		          tempList.add(index);
+		        }
+		
+		        atEdge = false;
+		        if(tempCol > 0)
+		          index = calcIndex(tempRow,tempCol-1);
+		        else
+		          atEdge = true;
+		        current = cells.get(index);
+		
+		        if(!atEdge && (current.isWalkway() || 
+		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.RIGHT))) {
+		          tempList.add(index);
+		        }
+		
+		        atEdge = false;
+		        if(tempCol < numColumns - 1)
+		          index = calcIndex(tempRow,tempCol+1);
+		        else
+		          atEdge = true;
+		
+		
+		        current = cells.get(index);
+		
+		        if(!atEdge && (current.isWalkway() || 
+		            (current.isDoorway() && ((RoomCell) current).getDoorDirection() == RoomCell.DoorDirection.LEFT))){
+		         tempList.add(index);
+		        }
+		        adjLists.put(key, tempList);
+		      }
+		    }
 	}
 			
 	//helper method for calc adjacency, only checks for rooms
